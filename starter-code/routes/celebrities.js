@@ -1,5 +1,6 @@
 const express = require('express');
 const Celebrity = require('../models/celebrity');
+const Movie = require('../models/movie');
 const router = express.Router();
 
 
@@ -16,13 +17,11 @@ router.get('/celebrities', (req, res) => {
 
 router.get('/celebrities/add', (req, res) => {
     console.log(req.params);
-
     res.render("celebrities/new");
 })
 
 router.get("/celebrities/edit/:id", (req, res) => {
     console.log(`called edit`);
-
     Celebrity.findById(req.params.id)
         .then(celebrity => {
             console.log(celebrity);

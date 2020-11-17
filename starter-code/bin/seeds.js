@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Celebrity = require("../models/celebrity");
+const Movie = require('../models/movie');
 
 mongoose.connect('mongodb://localhost/movies', {
     useNewUrlParser: true
@@ -23,10 +24,22 @@ const celebrities = [
     }
 ];
 
+const seedFilm ={
+title: 'Staying Home'
+}
+
 Celebrity.insertMany(celebrities)
 .then(data => {
     console.log(`Success! ${data.length} celebrities added to the collection`);
-    mongoose.connection.close();
+    // mongoose.connection.close();
+})
+.catch(err => {
+    console.log(err);
+});
+
+Movie.create(seedFilm)
+.then (data => {
+    console.log(`film added to collection`);
 })
 .catch(err => {
     console.log(err);
